@@ -1,0 +1,1 @@
+<a href="http://mqblog.ru/"><img src="<?php e($_s['base_url']); ?>/templates/a.gif"  alt="<?php e(VERSION); ?>" border="0" /></a> <img src="http://muhas.ru/templates/muhas/img/copyleft.png" alt="Mosquito" border="0" /> <a href="http://muhas.ru/?pg=about" title="Мищенков Михаил Владимирович">muhas</a>, 2008 - <?php echo date("Y"); ?> 

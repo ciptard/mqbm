@@ -1,0 +1,11 @@
+<?php if (is_admin()){ ?>
+
+<h6>Меню администратора</h6>
+<div class="sidefont">
+<a href="<?php e($_s['base_url']);?>/?action=add_post">новая запись</a><br/>
+<a href="<?php e($_s['base_url']);?>/?action=add_page">новая страница</a><br/>
+<a href="<?php e($_s['base_url']);?>/?action=config">конфигурация</a><br/>
+<a href="<?php e($_s['base_url']);?>/?pg=m.admin">настройка плагинов</a><br/>
+<a href="<?php e($_s['base_url']);?>/?action=logout">выход</a><br/><br/>
+</div>
+<?php }  ?>

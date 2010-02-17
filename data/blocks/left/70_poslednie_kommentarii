@@ -1,0 +1,5 @@
+<h6>Обсуждения</h6>
+<div class="padd"> 
+<?php last_comments(0); ?>
+</div>
+

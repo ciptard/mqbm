@@ -1,0 +1,6 @@
+<h6>Частые теги</h6>
+<div class="padd c"> 
+<?php 
+ top_tag_cloud(1, 10);
+?>
+<br /><a href="<?=page_link('Vse_tegi'); ?>" title="Просмотреть список всех тегов">все теги</a> | <a href="<?php e($_s['base_url']);?>/?list" title="Список всех записей в блоге">все записи</a></div><br />

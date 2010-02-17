@@ -1,0 +1,4 @@
+<h6><a href="./rss/">Подпишись на RSS</a></h6>
+<div class="padd c">
+ <a href="<?php e($_s['base_url']);?>/rss/" title="Подписаться на блог использую RSS"><img src="<?php e($_s['base_url']);?>/templates/rss.png" alt="RSS"  border="0"  hspace="3"  /></a>
+</div><br />

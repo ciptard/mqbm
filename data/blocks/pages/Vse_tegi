@@ -1,0 +1,9 @@
+<b class="pl">&nbsp;</b><b class="pr">&nbsp;</b><h2 class="title">Облако тегов</h2>
+
+<div class="entry" style="text-align:center;"> 
+<?
+
+tag_cloud(0.4);
+
+?>
+</div>

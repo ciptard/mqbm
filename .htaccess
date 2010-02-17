@@ -1,0 +1,8 @@
+ErrorDocument 404 /?pg=m.error404
+RewriteEngine On
+
+RewriteRule ^page/(.*) index.php?pg=$1 [L]
+RewriteRule ^p/(.*) index.php?p=$1 [L]
+RewriteRule ^skip/(.*)/tag/(.*) index.php?skip=$1&t=$2 [L]
+RewriteRule ^skip/(.*) index.php?skip=$1 [L]
+RewriteRule ^tag/(.*) index.php?t=$1 [L]

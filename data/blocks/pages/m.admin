@@ -1,0 +1,107 @@
+<?php
+if (is_admin()) {
+// Switch ON/OFF plugins
+if (isset($_v['on']) || isset($_v['off']))
+{
+        // switch ON the plugin
+        if (isset($_v['on']) && !in_array($_v['on'], $_s['plugins'])) $_s['plugins'][] = $_v['on'];
+        // switch OFF the plugin
+        else if (isset($_v['off']) && in_array($_v['off'], $_s['plugins'])) unset($_s['plugins'][ array_search($_v['off'], $_s['plugins']) ]);
+        fsave($_s['data_dir'].'/plugins', 'w', serialize($_s['plugins']));
+}
+?>
+<table border="0" width="100%" cellspacing="5"  class="mqplugins">
+<tr>
+<!-- Plugins list-->
+<td align="left" valign="top" width="150px">
+<?php
+
+// List of plugins
+foreach ($_s['plugins'] as $_plugin) {
+        if (file_exists($_s['plugin_dir'].'/'.$_plugin.'/info.inc'))
+        {
+                unset($actions);
+
+                if(file_exists($lf=$_s['plugin_dir'].'/'.$_plugin.'/lang_'.$_s['lang'].'.inc')) include $lf;
+                else include_once $_s['plugin_dir'].'/'.$_plugin.'/lang_def.inc';
+
+                include $_s['plugin_dir'].'/'.$_plugin.'/info.inc';
+
+                if (@$_v['plugin'] == $_plugin) $plugin_class = 'plugin_selected';
+                else $plugin_class = 'plugin';
+                print '<span class="'.$plugin_class.'"><a href="?pg='.$_s['admpage'].'&amp;plugin='.$_plugin.'" title="'.$plugin_description.'"><b>'.$plugin_name.'</b></a></span><br />';
+                if (isset($actions))
+                {
+                        foreach($actions as $action_link => $action_title)
+                        {
+                                $action_class = (@$_v['action'] == $action_link && @$_v['plugin'] == $_plugin ? 'action_selected' : 'action');
+                                e('&nbsp;&nbsp;&nbsp;&nbsp;<span class="'.$action_class.'"><a href="?pg='.$_s['admpage'].'&amp;plugin='.$_plugin.'&amp;action='.$action_link.'">'.$action_title.'</a></span><br />');
+                        }
+                }
+        }
+}
+
+?>
+
+</td>
+<!-- Plugin functions -->
+<td valign="top">
+<?php
+if (isset($_v['plugin'])) {
+        if (file_exists($_s['plugin_dir'].'/'.$_v['plugin'].'/info.inc')) {
+                $actions = false;
+                $_plugin=$_v['plugin'];
+
+                if(file_exists($lf=$_s['plugin_dir'].'/'.$_plugin.'/lang_'.$_s['lang'].'.inc')) include $lf;
+                else include_once $_s['plugin_dir'].'/'.$_plugin.'/lang_def.inc';
+
+                include($_s['plugin_dir'].'/'.$_v['plugin'].'/info.inc');
+
+                if (!$_v['action'])
+                {
+                        e('<div class="top_bar"><a href="?pg='.$_s['admpage'].'">'.$_l['admcplugins'].'</a> &rarr; <a href="?pg='.$_s['admpage'].'&amp;plugin='.$_v['plugin'].'">'.$plugin_name.'</a></div><br />');
+                        e('<font size="+1"> '.$plugin_name.'</font> <font size="1">v'.$plugin_version.'</font><br />');
+                        e($_l['admcplugauth'].': <b>'.$plugin_author.'</b><br /><br />');
+                        e($plugin_description.'<br /><br />');
+
+                        if ($actions)
+                        {
+                                e($_l['admcplugfunc'].'<br />');
+                                foreach($actions as $action_link => $action_title) e('&rarr; <a href="?pg='.$_s['admpage'].'&amp;plugin='.$_v['plugin'].'&amp;action='.$action_link.'">'.$action_title.'</a><br />');
+                        }
+
+                }
+                else
+                {
+                        e('<span class="top_bar"><a href="?pg='.$_s['admpage'].'">'.$_l['admcplugins'].'</a> &rarr; <a href="?pg='.$_s['admpage'].'&amp;plugin='.$_v['plugin'].'">'.$plugin_name.'</a> &rarr; <a href="?pg='.$_s['admpage'].'&amp;plugin='.$_v['plugin'].'&amp;action='.$_v['action'].'">'.(isset($actions[$_v['action']]) ? $actions[$_v['action']] : $_v['action']).'</a></span><br /><br />');
+                        include($_s['plugin_dir'].'/'.$_v['plugin'].'/admin.inc');
+                }
+        }
+}
+else        // list of ALL plugins
+{
+        e('<table border="0" width="100%"><tr> <td>'.$_l['admcplugins'].'</td> <td>'.$_l['admcplugdescr'].'</td> <td>'.$_l['admcplugauth'].'</td> <td>'.$_l['admcplugver'].'</td> <td>'.$_l['admcplugact'].'</td> ');
+
+        $dir = opendir($_s['plugin_dir']);
+        while (false !== ($plugin_file = readdir($dir)))
+        {
+                if (file_exists($_s['plugin_dir'].'/'.$plugin_file.'/info.inc'))
+                {
+                if(file_exists($lf=$_s['plugin_dir'].'/'.$plugin_file.'/lang_'.$_s['lang'].'.inc')) include $lf;
+                else include_once $_s['plugin_dir'].'/'.$plugin_file.'/lang_def.inc';
+
+                        include $_s['plugin_dir'].'/'.$plugin_file.'/info.inc';
+                        $plugin_state = ( in_array($plugin_file, $_s['plugins']) ? '<a href="?pg='.$_s['admpage'].'&amp;off='.$plugin_file.'"><font color="green">'.$_l['admcplugon'].'</font></a>' : '<a href="?pg='.$_s['admpage'].'&amp;on='.$plugin_file.'"><font color="red">'.$_l['admcplugoff'].'</font></a>');
+                        e('</tr><tr> <td>'.$plugin_name.'</td> <td>'.$plugin_description.'</td> <td>'.$plugin_author.'</td> <td>'.$plugin_version.'</td> <td>'.$plugin_state.'</td> ');
+                }
+        }
+        closedir($dir);
+        e('</tr></table>');
+}
+?>
+</td>
+</tr>
+</table>
+<?php
+}
+?>
