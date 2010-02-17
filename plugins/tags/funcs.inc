@@ -248,7 +248,7 @@ function show_near_post($number) {
 	  $post=post_info($p);
 	  $string.='<a href="'.generate_link($p).'">'.$post['title'].'</a><br />';
 	 }
-	 if($string=="") { echo "нет похожих записей<br />";} else {echo ''.$string.'</div>';};
+	 if($string=="") { echo "нет похожих записей</div><br />";} else {echo ''.$string.'</div>';};
 	}
 }
 function  tags_link($v) {

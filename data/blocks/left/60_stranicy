@@ -1,5 +1,5 @@
 <h6>Страницы</h6>
-<div class="padd">
+<div class="padd c">
 <?php
 pages_list('<a href=%link%>%page%</a><br/>');
 ?>
