@@ -233,7 +233,7 @@ function top_tag_cloud($s, $top) {
 function show_near_post($number) {
 	global $_v, $_s;
 	if(is_numeric($_v['p'])){
-	 echo '<h6>Смотрите также</h6><div class="padd">';
+	 echo '<h6>Смотрите также</h6><div class="padd c">';
 	 $altg=split(',',@file_get_contents($_s['tags_dir'].'/'.$_v['p']));
 	 $othposts=array();
 	 foreach($altg as $tg)$othposts=array_merge($othposts,getbytag($tg));
