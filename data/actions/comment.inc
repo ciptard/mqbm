@@ -85,7 +85,7 @@ if(isset($_v['p']) && trim($_v['p'])) {
           }
 		}
     }           hook('MQ_COMMENT2MAIL_BEFORE');
-    			if($_s['mail_comments'] && trim($_s['email'])) @mail($_s['email'], $_l['cmnto'].': '.$nick, $text."\n\n".generate_link($_v['p'])."#comment\n", "Content-Type: text/html; charset=".$_s['encoding']."\nFrom: "$_s['blogname'].$nick."<noreply-$_s[email]>\r\n");
+    			if($_s['mail_comments'] && trim($_s['email'])) @mail($_s['email'], $_l['cmnto'].': '.$nick, $text."<br><br>".generate_link($_v['p'])."#comment <br><br>, "Content-Type: text/html; charset=".$_s['encoding']."\nFrom: "$_s['blogname'].$nick."<noreply-$_s[email]>\r\n");
 
 				$ml=$_s['data_dir'].'/buffer/'.$_v['p'].'_maillist';
 				if(file_exists($ml) && filesize($ml)<2) @unlink($ml);
@@ -94,7 +94,7 @@ if(isset($_v['p']) && trim($_v['p'])) {
 				for ($i=0;$i<sizeof($maillist);$i++) {
 				$mail = str_replace("\n",'',$maillist[$i]);
 				hook('MQ_SUBSCRIBE_BEFORE');
-				@mail($mail, $_l['cmnto'].': '.$nick, $text."\n\n<a href='".generate_link($_v['p'])."#comment'>".$_l['link']."</a>\n\n<a href='".unsubs_link($_v['p'], $mail).">".$_l['unlink']."</a>\n", "Content-Type: text/html; charset=".$_s['encoding']."\nFrom: ".$_s['blogname'].$nick."<noreply-$_s[email]>\r\n");
+				@mail($mail, $_l['cmnto'].': '.$nick, $text."<br><br><a href='".generate_link($_v['p'])."#comment'>".$_l['link']."</a><br><br><a href='".unsubs_link($_v['p'], $mail).">".$_l['unlink']."</a><br>", "Content-Type: text/html; charset=".$_s['encoding']."\nFrom: ".$_s['blogname'].$nick."<noreply-$_s[email]>\r\n");
 					}
 				}
 
