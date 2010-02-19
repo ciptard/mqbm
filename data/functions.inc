@@ -366,14 +366,14 @@ function post_menu() {	global $post, $_l, $_s;
 		if(is_admin()) {		hook('MQ_POST_MENU');
  		$d='';
         if($_s['confirm_post']) $d = 'onclick="return confirm(\''.$_l['confirm'].' ['.$post['title'].']\')"';
-        if(@$post['close']) $post['menu']='<a href="?action=unlock_post&amp;p='.$post['id'].'">'.$_l['closepost_'].'</a>'.$post['menu'];
-        else $post['menu']='<a href="?action=lock_post&amp;p='.$post['id'].'">'.$_l['closepost'].'</a>'.$post['menu'];
-        if(@$post['hidden']) $post['menu']='<a href="?action=unhide_post&amp;p='.$post['id'].'">'.$_l['hidepost_'].'</a>'.$post['menu'];
-        else $post['menu']='<a href="?action=hide_post&amp;p='.$post['id'].'">'.$_l['hidepost'].'</a>'.$post['menu'];
+        if(@$post['close']) $post['menu']='<a href="'.$_s['base_url'].'/?action=unlock_post&amp;p='.$post['id'].'">'.$_l['closepost_'].'</a>'.$post['menu'];
+        else $post['menu']='<a href="'.$_s['base_url'].'/?action=lock_post&amp;p='.$post['id'].'">'.$_l['closepost'].'</a>'.$post['menu'];
+        if(@$post['hidden']) $post['menu']='<a href="'.$_s['base_url'].'/?action=unhide_post&amp;p='.$post['id'].'">'.$_l['hidepost_'].'</a>'.$post['menu'];
+        else $post['menu']='<a href="'.$_s['base_url'].'/?action=hide_post&amp;p='.$post['id'].'">'.$_l['hidepost'].'</a>'.$post['menu'];
  		if(@$post['holdtime']) $post['menu']=$post['menu'].str_replace('%date%',date($_s['dateformat'],$post['ida']+$_s['time_offset']*3600),$_l['holdtime']);
  		if(@$post['dietime']) $post['menu']=$post['menu'].str_replace('%date%',date($_s['dateformat'],$post['dietime']+$_s['time_offset']*3600),$_l['dietime']);
- 		$post['edit'] = '<a href="'.$_SERVER['PHP_SELF'].'?action=edit_post&amp;p='.$post['id'].'">'.$_l['post_ed'].'</a>';
-   		$post['del']  = '<a href="'.$_SERVER['PHP_SELF'].'?action=del_post&amp;p='.$post['id'].'" '.$d.'>'.$_l['post_del'].'</a>';
+ 		$post['edit'] = '<a href="'.$_s['base_url'].'/?action=edit_post&amp;p='.$post['id'].'">'.$_l['post_ed'].'</a>';
+   		$post['del']  = '<a href="'.$_s['base_url'].'/?action=del_post&amp;p='.$post['id'].'" '.$d.'>'.$_l['post_del'].'</a>';
         $post['menu'] = $post['menu'].$post['edit'].$post['del'];
         }
 }
@@ -436,7 +436,7 @@ function page($pg) {
   		if((eregi("^([A-Za-z0-9А])", $pg) && !ereg('.off',$_s['pages_dir'].'/'.$pg) && !is_admin() && file_exists($_s['pages_dir'].'/'.$_s['page404']) && !file_exists($_s['pages_dir'].'/'.$pg)) || (strstr($pg, 'm.') && !is_admin())) $pg=$_s['page404'];
 		$d='';
         if($_s['confirm_page']) $d = 'onclick="return confirm(\''.$_l['confirm'].' ['.$pg.']\')"';
-		if(is_admin()) e('<a href="'.$_SERVER['PHP_SELF'].'?action=edit_page&amp;pg='.$pg.'">'.$_l['ed'].'</a> <a href="'.$_SERVER['PHP_SELF'].'?action=del_page&amp;pg='.$pg.'" '.$d.'>'.$_l['del'].'</a><br />');
+		if(is_admin()) e('<a href="'.$_s['base_url'].'/?action=edit_page&amp;pg='.$pg.'">'.$_l['ed'].'</a> <a href="'.$_s['base_url'].'/?action=del_page&amp;pg='.$pg.'" '.$d.'>'.$_l['del'].'</a><br />');
 		if(file_exists($_s['pages_dir'].'/'.$pg)) {
 			hook('MQ_PAGE_SHOW_BEFORE');
 			include_once($_s['pages_dir'].'/'.$pg);
