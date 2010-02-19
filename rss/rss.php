@@ -4,14 +4,11 @@ Error_Reporting(E_ALL & ~E_NOTICE);
 header('Pragma: no-cache');
 header('Content-type: application/xml');
 define('INCLUDED', TRUE);
-$mask="%02s-%02s-%04s, %02s:%02s";
 $_s['include_blog']='../';
-
 include_once '../data/functions.inc';
 include_once $_s['pages_dir'].'/m.settings';
 include_once $_s['lang_dir'].'/'.$_s['lang'].'.inc';
-$_s['dateformat']='d-m-Y, H:i';
-$_s['comment_dateformat']='d-m-Y, H:i';
+$_s['comment_dateformat']='r';
 if(file_exists($_s['plugin_dir'].'/symlink/funcs.inc')) include_once $_s['plugin_dir'].'/symlink/funcs.inc';
 
 load_plugins();
@@ -62,9 +59,7 @@ if (isset($_GET['id']) && file_exists($_s['comment_dir'].'/'.$_GET['id'])) {
 		if(@$cmnt['priv']!=1) {
         $nick = $date = $text = $title = '';
   		$nick = htmlspecialchars($cmnt['nick'], ENT_QUOTES);
-  				$date = $post['date'];
-				list($day,$month,$year, $h, $m) = sscanf($date, $mask);
-				$date=date("r", mktime($h, $m, 0, $month, $day, $year));
+  		$date = $cmnt['date'];
   		$text = htmlspecialchars($cmnt['text'], ENT_QUOTES);
   		$title = mb_substr($text,0,30,'UTF-8');
 		hook('MQ_RSS_COMMENT_SHOW_BEFORE');
@@ -100,9 +95,7 @@ else if(isset($_GET['last_comments']) && file_exists($_s['data_dir'].'/lcomments
             cmt_prepare();
             $nick = $date = $text = $title = '';
             $nick = htmlspecialchars($cmnt['nick'], ENT_QUOTES);
-				$date = $post['date'];
-				list($day,$month,$year, $h, $m) = sscanf($date, $mask);
-				$date=date("r", mktime($h, $m, 0, $month, $day, $year));
+			$date = $cmnt['date'];
             $text = htmlspecialchars($cmnt['text'], ENT_QUOTES);
             $title = mb_substr($text,0,30,'UTF-8');
 	        if($cmnt['priv']!=1) {
@@ -121,10 +114,7 @@ else if(isset($_GET['last_comments']) && file_exists($_s['data_dir'].'/lcomments
 else if(isset($_GET['tags']) && file_exists($_s['data_dir'].'/tags/cache/'.$_GET['tags']) && file_exists($_s['plugin_dir'].'/tags/funcs.inc')) {
        include_once $_s['plugin_dir'].'/tags/funcs.inc';
 		if(!$pub) {
-		//muhas
 		$posts = getbytag($_GET['tags']);
-		//muhas
-        //$posts = get_posts();
         } else {
         $posts[0]=$pub;
         $_s['short']=0;
@@ -165,9 +155,7 @@ else if(isset($_GET['tags']) && file_exists($_s['data_dir'].'/tags/cache/'.$_GET
 
                 if ($_s['short']==2) $text = "";
                 $title = htmlspecialchars($post['title'], ENT_QUOTES);
-				$date = $post['date'];
-				list($day,$month,$year, $h, $m) = sscanf($date, $mask);
-				$date=date("r", mktime($h, $m, 0, $month, $day, $year));
+				$date = date("r", $post['ida']);
 			hook('MQ_RSS_ENTRY_SHOW_BEFORE');
 ?>
 <item>
@@ -197,7 +185,8 @@ else {
 
         for ($i = 0; $i< sizeof($posts); $i++) {
 
-                if($post = post_info($posts[$i])) {
+                if($post = post_info($posts[$i])) {
+
                 $post_id = $post['id'];
 
                 hook('MQ_RSS_ENTRY_PROCESS_BEFORE');
@@ -223,9 +212,7 @@ else {
 
                 if ($_s['short']==2) $text = "";
                 $title = htmlspecialchars($post['title'], ENT_QUOTES);
-				$date = $post['date'];
-				list($day,$month,$year, $h, $m) = sscanf($date, $mask);
-				$date=date("r", mktime($h, $m, 0, $month, $day, $year));
+				$date = date("r", $post['ida']);
 	hook('MQ_RSS_ENTRY_SHOW_BEFORE');
 ?>
 <item>
