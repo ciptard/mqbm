@@ -117,6 +117,7 @@ if(isset($_POST['save'])) {
 if(isset($_POST['save'])) {
 	save_mqconfig();
 	unlink($mqlock);
+	e('<br><br>Сайт успешно установлен.<br>Теперь вы можете зайти на сайт как администратор с использованием установленного пароля<br><br><big><a href="./">на сайт</a></big><br><br>Mosquito Bloody Mary (mqbm) распространяется на условиях генеральной общественной лицензии версии 3 (GPL v.3) и выше, подробнее <a href="http://mqblog.ru/page/Licenziya">тут</a>');
 } elseif(isset($_POST['conf']) ||isset($_GET['conf'])) {
 	$lang=$_POST['lang'];
 	mqconfig();
