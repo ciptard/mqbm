@@ -52,12 +52,14 @@ if(isset($_v['p']) && trim($_v['p'])) {
 				if(($post['subs'] || $_s['subscribe']) && isset($_v['subsmy'])) {
 				$mailadd=trim($_v['mmail']);
 				$ml=@buffer($_v['p'], 'maillist');
-				if(!ereg($mailadd,$ml)) {					$_v['maillist']=$ml.$mailadd."\n";
+				if(!ereg($mailadd,$ml)) {
+					$_v['maillist']=$ml.$mailadd."\n";
 					buffer($_v['p'], 'maillist');
 					e($_l['subscribe']);
 				}
 				}
-				} else {				$_v['mmail']='';
+				} else {
+				$_v['mmail']='';
 				}
 
                 if ($comment_allow) {
@@ -85,7 +87,7 @@ if(isset($_v['p']) && trim($_v['p'])) {
           }
 		}
     }           hook('MQ_COMMENT2MAIL_BEFORE');
-    			if($_s['mail_comments'] && trim($_s['email'])) @mail($_s['email'], $_l['cmnto'].': '.$nick, $text."<br><br>".generate_link($_v['p'])."#comment <br><br>, "Content-Type: text/html; charset=".$_s['encoding']."\nFrom: "$_s['blogname'].$nick."<noreply-$_s[email]>\r\n");
+    			if($_s['mail_comments'] && trim($_s['email'])) @mail($_s['email'], $_l['cmnto'].': '.$nick, $text."<br><br><a href='".generate_link($_v['p'])."#comment'>".$_l['link']."</a><br>", "Content-Type: text/html; charset=".$_s['encoding']."\nFrom: ".$_s['blogname'].$nick."<noreply-$_s[email]>\r\n");
 
 				$ml=$_s['data_dir'].'/buffer/'.$_v['p'].'_maillist';
 				if(file_exists($ml) && filesize($ml)<2) @unlink($ml);
