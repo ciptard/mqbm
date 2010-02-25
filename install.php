@@ -1,5 +1,4 @@
-<? error_reporting(E_ALL & ~E_NOTICE); ?>
-<?
+<? error_reporting(E_ALL & ~E_NOTICE);
 if (isset($_POST['lang'])) {
 	include_once 'lang/'.$_POST['lang'].'.inc';
 } else {
@@ -7,8 +6,8 @@ include_once 'lang/ru.inc';
 }
 include_once 'data/functions.inc';
 include_once 'data/blocks/pages/m.settings';
-$mqlock=$_s['pages_dir'].'/m.lock';
-if(!file_exists($mqlock)){header('Location: index.php');}
+$_s['base_url']=".";
+if(!file_exists("data/blocks/pages/m.lock")){header('Location: index.php');}
 
 
 
@@ -36,15 +35,17 @@ function creat_file_list($s){
 	}	
 	return $ff; 
 }
+
 function check_perm() {
 	global $_s; ?> 
 	<table border="0" width="100%" cellspacing="0" id="mqconfig">
 	<? 
 	
 	$files = creat_file_list('data');
+	$files[]="data";
 	$files[]="data/blocks/pages/m.settings";
 	$files[]="data/blocks/pages/m.error404";
-	$files[]="data/sess";
+	$files[]="data/blocks/pages/m.lock";
 	$files[]="upload";
 	$files[]="upload/attach";
 	$files[]="upload/post";
@@ -52,6 +53,7 @@ function check_perm() {
 		e('<tr><td>'.$i.'</td>');
 		@chmod($i,'777');
 		$perms[$k]=substr(sprintf('%o',fileperms("$i")),-3);
+		#$perms[$k]=file_perms($i);
 		if($perms[$k] != "777") { $style='color:red;'; } else { $style='color:green;';}
 		e('<td style='.$style.'>'.$perms[$k].'</td></tr>');
 	}
@@ -67,7 +69,14 @@ function check_perm() {
 		</form>
 	<?
 	} else {
-		e('check permissons');
+		e('<big style="color:red;"><b>Проверьте права!!!</b></big> Необходимо 777 на все указанные файлы <br>Если у Вас возникают проблемы с проверкой прав, но Вы уверены что права у вас установлены верно, то пропустите этот шаг');
+		?>
+		<form action="install.php" method="post">
+			<input type="hidden" name="conf" value="">
+			<input type="hidden" name="lang" value="<?=$_s['lang'];?>" /><br/>
+			<input type="submit" value="Next" style="width:100%;">
+		</form>
+		<?
 	}
 	
 }
@@ -116,7 +125,7 @@ if(isset($_POST['save'])) {
 
 if(isset($_POST['save'])) {
 	save_mqconfig();
-	unlink($mqlock);
+	unlink("data/blocks/pages/m.lock");
 	e('<br><br>Сайт успешно установлен.<br>Теперь вы можете зайти на сайт как администратор с использованием установленного пароля<br><br><big><a href="./">на сайт</a></big><br><br>Mosquito Bloody Mary (mqbm) распространяется на условиях генеральной общественной лицензии версии 3 (GPL v.3) и выше, подробнее <a href="http://mqblog.ru/page/Licenziya">тут</a>');
 } elseif(isset($_POST['conf']) ||isset($_GET['conf'])) {
 	$lang=$_POST['lang'];

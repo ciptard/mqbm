@@ -1,6 +1,6 @@
 <?php
 session_save_path($_s['include_blog'].'data/sess');
-define('VERSION', 'Mosquito Bloody Mary 0.1.78 (0.2 RC2)');
+define('VERSION', 'Mosquito Bloody Mary 0.1.79 (RC2 для 0.2)');
 // Директории
 $_s['tpl_dir']=$_s['include_blog'].'templates';
 $_s['lang_dir']=$_s['include_blog'].'lang';
@@ -47,7 +47,6 @@ function posttext($t) {
 	
 	$t = eregi_replace('<cut', '<cut', $t);
 	$t = eregi_replace('<lj-cut', '<cut', $t);
-	//$post['text'] = preg_replace_callback("#\<pre\>(.*)\<\/pre\>#is", "pre", $post['text']);$post['text'] = str_replace("\n", "<br />\n", $post['text']);
 	return $t;
 }
 
@@ -357,7 +356,6 @@ function chekers() {	global $_v, $_s, $post;
 //
 function chec_conf($c) {
 	global $_s;
-	
 	if($_s[$c]=="1") e('checked="checked"');
 }
 // menu gen functions
@@ -428,8 +426,6 @@ function rss_link() {
         if($_s['base_url']) return $_s['base_url'].'/rss';
         return $_s['base_url'].$_SERVER['PHP_SELF'].'/rss';
 }
-
-//
 
 function page($pg) {
 		global $_l, $_s, $tpl, $_v;
@@ -690,7 +686,6 @@ function mqconfig() {
 </form>
 <?
 }
-
 
 function e($e) {
 	echo $e;
