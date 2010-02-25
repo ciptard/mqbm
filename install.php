@@ -61,24 +61,17 @@ function check_perm() {
 	$good=array_diff($perms,array("777"));
 
 	if ( $good == Array() ) {
-	?>
-		<form action="install.php" method="post">
-			<input type="hidden" name="conf" value="">
-			<input type="hidden" name="lang" value="<?=$_s['lang'];?>" /><br/>
-			<input type="submit" value="Next" style="width:100%;">
-		</form>
-	<?
 	} else {
 		e('<big style="color:red;"><b>Проверьте права!!!</b></big> Необходимо 777 на все указанные файлы <br>Если у Вас возникают проблемы с проверкой прав, но Вы уверены что права у вас установлены верно, то пропустите этот шаг');
+
+	}
 		?>
 		<form action="install.php" method="post">
 			<input type="hidden" name="conf" value="">
 			<input type="hidden" name="lang" value="<?=$_s['lang'];?>" /><br/>
 			<input type="submit" value="Next" style="width:100%;">
 		</form>
-		<?
-	}
-	
+		<?	
 }
 if(isset($_POST['save'])) {
 	$title="step 3";
