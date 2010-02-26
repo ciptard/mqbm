@@ -51,7 +51,6 @@ function check_perm() {
 	$files[]="upload/post";
 	foreach ($files as $k => $i) {
 		e('<tr><td>'.$i.'</td>');
-		@chmod($i,'777');
 		$perms[$k]=substr(sprintf('%o',fileperms("$i")),-3);
 		#$perms[$k]=file_perms($i);
 		if($perms[$k] != "777") { $style='color:red;'; } else { $style='color:green;';}
