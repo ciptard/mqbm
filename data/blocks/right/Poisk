@@ -1,0 +1,5 @@
+<h6>Поиск</h6>
+<div class="padd"><form method="post" action="index.php" id="search">
+	<input type="text" name="scword" value="поиск по записям" onfocus="if(this.value=='поиск по записям')this.value=''" onblur="if(this.value=='')this.value='поиск по записям'" class="input" />
+	<input type="submit" value="Найти" class="submit" />
+</form></div>
