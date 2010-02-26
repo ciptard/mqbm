@@ -1,0 +1,8 @@
+<h6>Теги</h6>
+<div class="padd">
+<ul>
+<?php
+tag_list('<li><a href=%link%>%tag%</a> (%num%)</li>');
+?>
+</ul>
+</div>
