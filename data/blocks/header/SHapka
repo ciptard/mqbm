@@ -1,2 +1,2 @@
 <h1><a href="<?php e($_s['base_url']);?>/">Mosquito Bloody Mary</a></h1>
-Блог о блог-движке
+<p>Блог о блог-движке</p>
