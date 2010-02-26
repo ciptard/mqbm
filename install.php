@@ -1,4 +1,4 @@
-<? error_reporting(E_ALL & ~E_NOTICE);
+<? error_reporting(E_ALL & !~E_NOTICE);
 if (isset($_POST['lang'])) {
 	include_once 'lang/'.$_POST['lang'].'.inc';
 } else {
@@ -8,8 +8,6 @@ include_once 'data/functions.inc';
 include_once 'data/blocks/pages/m.settings';
 $_s['base_url']=".";
 if(!file_exists("data/blocks/pages/m.lock")){header('Location: index.php');}
-
-
 
 function creat_file_list($s){
 	if ($h=@opendir($s)) {
