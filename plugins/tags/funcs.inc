@@ -134,8 +134,10 @@ function tag_list($tpl) {
 	foreach($entries as $tag) {
 	ct($tag);
 	$altgs='';
+	if($_s['config_chpu'] == "1") $tchpu=$_s['base_url'].'/tag/';
+        else $tchpu=$_s['base_url'].'/?t=';
 	$altgs=str_replace('%tag%',tag_translit($tag,1),$tpl);
-	$altgs=str_replace('%link%','?t='.$tag,$altgs);
+	$altgs=str_replace('%link%',$tchpu.$tag,$altgs);
 	$altgs=str_replace('%num%',sizeof(explode(',',file_get_contents($_s['tags_dir'].'/cache/'.$tag))),$altgs);
 	$alltags .= $altgs;
 	}
