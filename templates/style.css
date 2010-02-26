@@ -419,4 +419,21 @@ padding: 0 5px 0 5px;
 	width:100%;
 	height:20px;
 }
-
+#mqplugins {
+	border-top:1px solid #dedede;
+	border-left:1px solid #dedede;
+}
+#mqplugins td {
+	border-bottom:1px solid #dedede;
+	border-right:1px solid #dedede;
+	padding:5px;
+}
+#plugopt table  td {
+	border:0;
+}
+#plugopt table  th {
+	font-weight:bold;
+	text-align:left;
+	padding:5px;
+}
+#plugopt .top_bar {font-weight:bold;}
