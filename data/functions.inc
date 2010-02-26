@@ -499,7 +499,7 @@ function chose_lang() {
 // проверяем конфиг
 function chec_conf($c) {
 	global $_s;
-	if($_s[$c]=="1" || $_s['blockmenu']) e('checked="checked"');
+	if($_s[$c]=="1") e('checked="checked"');
 }
 //сохраняем конфиг
 function save_mqconfig() {
@@ -517,7 +517,7 @@ function save_mqconfig() {
 	foreach ($_mq as $k => $v) $wd .= '$_s[\''.$k.'\']=\''.prp($v).'\';'."\n";
 	if(isset($wd)) fsave($_s['pages_dir'].'/m.settings','w+',"<?php\n".$wd."?>");
 	
-	redirect($_s['base_url'].'/?action=config');
+	if ($_l['install'] != "done") redirect($_s['base_url'].'/?action=config');
 }
 //выводим форму редактирования
 function mqconfig() {
@@ -605,7 +605,7 @@ function mqconfig() {
 	</tr>
 	<tr>
 		<td><?=$_l['blockmenu'];?> </td>
-		<td><input type="checkbox" name="blockmenu" <?php chec_conf('blockmenu');?>  class="checkbox"/> </td>
+		<td><input type="checkbox" name="blockmenu" <?php if($_s['blockmenu']);e('checked="checked"'); ?>  class="checkbox"/> </td>
 	</tr>
 	<tr>
 		<td><?=$_l['confirm_block'];?></td>
