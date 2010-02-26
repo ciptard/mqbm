@@ -162,6 +162,7 @@ else if (isset($_v['p'])) {
 }
 
 hook('MQ_FOOTHER_BEFORE');
+e('<!-- mqbm: '.VERSION.' -->');
 include_once $_s['tpl_dir'].'/'.$tpl['foother'];
 hook('MQ_FOOTHER_AFTER');
 ?>
