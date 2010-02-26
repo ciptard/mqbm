@@ -1,1 +1,3 @@
-<a href="http://mqblog.ru/"><img src="<?php e($_s['base_url']); ?>/templates/a.gif"  alt="<?php e(VERSION); ?>" border="0" /></a> <a href="http://mqblog.ru/page/Licenziya"><img src="http://muhas.ru/templates/muhas/img/copyleft.png" alt="copyleft" border="0" /></a>	 <a href="<?php e($_s['base_url']); ?>"><?php e($_s['blogname']);?></a>, <?php echo date("Y"); ?> 
+<a href="http://mqblog.ru/"><img src="<?php e($_s['base_url']); ?>/templates/a.gif"  alt="<?php e(VERSION); ?>" border="0" /></a>
+<a href="http://mqblog.ru/page/Licenziya"><img src="http://muhas.ru/templates/muhas/img/copyleft.png" alt="copyleft" border="0" /></a>
+<a href="<?php e($_s['base_url']); ?>"><?php e($_s['blogname']);?></a>, <?php echo date("Y"); ?> 
