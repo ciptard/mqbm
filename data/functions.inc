@@ -353,11 +353,7 @@ function chekers() {	global $_v, $_s, $post;
 	 if(@trim($post['commhide'])) $_s['prmchk']=$c;
 	 if(@trim($post['commpriv'])) $_s['prvchk']=$c;
 }
-//
-function chec_conf($c) {
-	global $_s;
-	if($_s[$c]=="1") e('checked="checked"');
-}
+
 // menu gen functions
 function post_menu() {	global $post, $_l, $_s;
 		$post['menu']=$post['del']=$post['edit']='';
@@ -464,7 +460,7 @@ function container($container) {
         		$d='';
         		if($_s['confirm_block']) $d = 'onclick="return confirm(\''.$_l['confirm'].' ['.$block.']\')"';
                 if(is_admin() && $_s['blockmenu']) {
-                $_s['blockmenu']=' <font face="Verdana"  size="1"><a href="?pg='.$_s['admpage'].'&amp;plugin=blocks&amp;action=edit&amp;container='.$container.'&amp;block='.$block.'">'.$_l['ed'].'</a><a href="?pg='.$_s['admpage'].'&amp;plugin=blocks&amp;action=del&amp;container='.$container.'&amp;block='.$block.'" '.$d.'>'.$_l['del'].'</a></font> ';
+                $_s['blockmenu']='<small><a href="'.$_s['base_url'].'?pg='.$_s['admpage'].'&amp;plugin=blocks&amp;action=edit&amp;container='.$container.'&amp;block='.$block.'">'.$_l['ed'].'</a><a href="'.$_s['base_url'].'?pg='.$_s['admpage'].'&amp;plugin=blocks&amp;action=del&amp;container='.$container.'&amp;block='.$block.'" '.$d.'>'.$_l['del'].'</a></small> ';
                 e($_s['blockmenu']);
                 }
                 hook('MQ_BLOCK_INCLUDE_BEFORE');
@@ -499,6 +495,12 @@ function chose_lang() {
 	</select>
 <?
 }
+
+// проверяем конфиг
+function chec_conf($c) {
+	global $_s;
+	if($_s[$c]=="1" || $_s['blockmenu']) e('checked="checked"');
+}
 //сохраняем конфиг
 function save_mqconfig() {
 	global $_s, $_l;
@@ -515,7 +517,7 @@ function save_mqconfig() {
 	foreach ($_mq as $k => $v) $wd .= '$_s[\''.$k.'\']=\''.prp($v).'\';'."\n";
 	if(isset($wd)) fsave($_s['pages_dir'].'/m.settings','w+',"<?php\n".$wd."?>");
 	
-	e($_l['config_save']);	
+	redirect($_s['base_url'].'/?action=config');
 }
 //выводим форму редактирования
 function mqconfig() {
@@ -602,7 +604,7 @@ function mqconfig() {
 		<td> <input type="text" name="page404" value="<?=$_s['page404'];?>" class="input" /></td>
 	</tr>
 	<tr>
-		<td><?=$_l['blockmenu'];?></td>
+		<td><?=$_l['blockmenu'];?> </td>
 		<td><input type="checkbox" name="blockmenu" <?php chec_conf('blockmenu');?>  class="checkbox"/> </td>
 	</tr>
 	<tr>

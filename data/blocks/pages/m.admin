@@ -10,10 +10,10 @@ if (isset($_v['on']) || isset($_v['off']))
         fsave($_s['data_dir'].'/plugins', 'w', serialize($_s['plugins']));
 }
 ?>
-<table border="0" width="100%" cellspacing="5"  class="mqplugins">
+<table border="0" width="100%" cellspacing="0"  cellspacing="0" id="mqplugins">
 <tr>
 <!-- Plugins list-->
-<td align="left" valign="top" width="150px">
+<td align="left" valign="top" width="150px" id="plug">
 <?php
 
 // List of plugins
@@ -45,7 +45,7 @@ foreach ($_s['plugins'] as $_plugin) {
 
 </td>
 <!-- Plugin functions -->
-<td valign="top">
+<td valign="top" id="plugopt">
 <?php
 if (isset($_v['plugin'])) {
         if (file_exists($_s['plugin_dir'].'/'.$_v['plugin'].'/info.inc')) {
@@ -60,7 +60,7 @@ if (isset($_v['plugin'])) {
                 if (!$_v['action'])
                 {
                         e('<div class="top_bar"><a href="?pg='.$_s['admpage'].'">'.$_l['admcplugins'].'</a> &rarr; <a href="?pg='.$_s['admpage'].'&amp;plugin='.$_v['plugin'].'">'.$plugin_name.'</a></div><br />');
-                        e('<font size="+1"> '.$plugin_name.'</font> <font size="1">v'.$plugin_version.'</font><br />');
+                        e('<big>'.$plugin_name.'</big> v'.$plugin_version.'<br />');
                         e($_l['admcplugauth'].': <b>'.$plugin_author.'</b><br /><br />');
                         e($plugin_description.'<br /><br />');
 
@@ -80,7 +80,7 @@ if (isset($_v['plugin'])) {
 }
 else        // list of ALL plugins
 {
-        e('<table border="0" width="100%"><tr> <td>'.$_l['admcplugins'].'</td> <td>'.$_l['admcplugdescr'].'</td> <td>'.$_l['admcplugauth'].'</td> <td>'.$_l['admcplugver'].'</td> <td>'.$_l['admcplugact'].'</td> ');
+        e('<table border="0" cellspacing="0" width="100%"><tr> <th>'.$_l['admcplugins'].'</th> <th>'.$_l['admcplugdescr'].'</th> <th>'.$_l['admcplugauth'].'</th> <th>'.$_l['admcplugver'].'</th> <th>'.$_l['admcplugact'].'</th> ');
 
         $dir = opendir($_s['plugin_dir']);
         while (false !== ($plugin_file = readdir($dir)))
@@ -91,7 +91,7 @@ else        // list of ALL plugins
                 else include_once $_s['plugin_dir'].'/'.$plugin_file.'/lang_def.inc';
 
                         include $_s['plugin_dir'].'/'.$plugin_file.'/info.inc';
-                        $plugin_state = ( in_array($plugin_file, $_s['plugins']) ? '<a href="?pg='.$_s['admpage'].'&amp;off='.$plugin_file.'"><font color="green">'.$_l['admcplugon'].'</font></a>' : '<a href="?pg='.$_s['admpage'].'&amp;on='.$plugin_file.'"><font color="red">'.$_l['admcplugoff'].'</font></a>');
+                        $plugin_state = ( in_array($plugin_file, $_s['plugins']) ? '<a href="?pg='.$_s['admpage'].'&amp;off='.$plugin_file.'"  style="color:green;">'.$_l['admcplugon'].'</a>' : '<a href="?pg='.$_s['admpage'].'&amp;on='.$plugin_file.'" style="color:red;">'.$_l['admcplugoff'].'</a>');
                         e('</tr><tr> <td>'.$plugin_name.'</td> <td>'.$plugin_description.'</td> <td>'.$plugin_author.'</td> <td>'.$plugin_version.'</td> <td>'.$plugin_state.'</td> ');
                 }
         }
