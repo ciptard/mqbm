@@ -1,8 +1,8 @@
 <?php
 $plugin_name = 'Tags';
-$plugin_version = '0.6.2';
+$plugin_version = '0.6.3';
 $plugin_description = $_l['tag_desc'];
-$plugin_author = 'Bolzamo [port:Zorg]';
+$plugin_author = 'Bolzamo & Zorg & muhas';
 
 register_hook('MQ_POST_ADD_AFTER', 'tagit');
 register_hook('MQ_POST_SHOW_BEFORE', 'get_post_tags');
