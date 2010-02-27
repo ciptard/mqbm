@@ -1,6 +1,6 @@
 <?php
 session_save_path($_s['include_blog'].'data/sess');
-define('VERSION', 'Mosquito Bloody Mary 0.2)');
+define('VERSION', 'Mosquito Bloody Mary 0.2');
 // Директории
 $_s['tpl_dir']=$_s['include_blog'].'templates';
 $_s['lang_dir']=$_s['include_blog'].'lang';
