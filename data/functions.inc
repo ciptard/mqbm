@@ -40,11 +40,11 @@ function prp($t) {
 }
 
 function posttext($t) {
+	$t = preg_replace_callback("#\<code\>(.*)\<\/code\>#is", "codepost", $t);
 	$t = preg_replace_callback("#\<pre\>(.*)\<\/pre\>#is", "pre", $t);
 	$t = str_replace("\n", "<br />\n", $t);
 	$t = str_replace("\r", "\n", $t);
 	$t = str_replace("tmpnbsp", "\n", $t);
-	
 	$t = eregi_replace('<cut', '<cut', $t);
 	$t = eregi_replace('<lj-cut', '<cut', $t);
 	return $t;

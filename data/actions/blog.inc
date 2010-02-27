@@ -36,7 +36,6 @@
 				if(!$post['title']) $post['title']=$_l['notitle'];
 
                 $post['text'] = posttext($post['text']);
-
                 if(preg_match("#(.*)<cut text=\"(.*)\">#sU", $post['text'], $cut) or preg_match("#(.*)<cut>#sU", $post['text'], $cut))
                 {
                         $post['text'] = str_replace('</cut>', '', $post['text']);
