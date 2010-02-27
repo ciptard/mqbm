@@ -54,7 +54,10 @@ function pre($str) {
         $str[0] = str_replace(array("\r", "\n"), array('',"tmpnbsp"), $str[0]);
         return $str[0];
 }
-
+function codepost($str) {
+        $str = str_replace(array('<', '>', '&lt;code&gt;', '&lt;/code&gt;' ), array('&lt;', '&gt;', '<pre><code>', '</code></pre>'), $str[0]);
+        return $str;
+}
 function bbcode($t) {
 	global $_s;
 	$bk=explode(',',$_s['bb_comments']);
