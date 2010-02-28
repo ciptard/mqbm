@@ -116,17 +116,16 @@ function tag_cloud($s) {
 	$e=explode(':',buffer('Tags','sett'));
 	if(@trim($e[0])) $_s['tag_tag_translit']=1;
 	else $_s['tag_tag_translit']=0;
-	if(isset($tags)) foreach($tags as $tag => $size) e(" <a href='".$_s['base_url']."/tag/".$tag."' title='".$size."'><font size=\"".(($size*$s)+0.5)."px\">".tag_translit($tag,1)."</font></a> ");
+	if(isset($tags)) foreach($tags as $tag => $size) e(" <a href='".$_s['base_url']."/tag/".$tag."' title='".$size."' style='font-size:".(($size*$s)+13)."px'>".tag_translit($tag,1)."</a> ");
 }
 
 function tag_list($tpl) {
-	global $_s, $_v;
-
+	global $_s, $_v, $entries;
 	$d = dir($_s['tags_dir'].'/cache');
 	while (false !== ($entry = $d->read()))
 	if ($entry!='.' && $entry!='..') $entries[] = $entry;
 	$d->close();
-
+	hook('MQ_TAGS_SHOW_BEFORE');
 	$alltags='';
 	$e=explode(':',buffer('Tags','sett'));
 	if(@trim($e[0])) $_s['tag_tag_translit']=1;
@@ -230,7 +229,7 @@ function top_tag_cloud($s, $top) {
 	$e=explode(':',buffer('Tags','sett'));
 	if(@trim($e[0])) $_s['tag_tag_translit']=1;
 	else $_s['tag_tag_translit']=0;
-	if(isset($tags)) foreach($tags as $tag => $size) e(" <a href='".tags_link($tag)."' title='Записей: ".$size."'><font size=\"".(($size*$s)+0.5)."px\">".tag_translit($tag,1)."</font></a> ");
+	if(isset($tags)) foreach($tags as $tag => $size) e(" <a href='".tags_link($tag)."' title='".$size."' style='font-size:".(($size*$s)+13)."px'>".tag_translit($tag,1)."</a> ");
 }
 function show_near_post($number) {
 	global $_v, $_s;

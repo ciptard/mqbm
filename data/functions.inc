@@ -45,8 +45,8 @@ function posttext($t) {
 	$t = str_replace("\n", "<br />\n", $t);
 	$t = str_replace("\r", "\n", $t);
 	$t = str_replace("tmpnbsp", "\n", $t);
-	$t = eregi_replace('<cut', '<cut', $t);
-	$t = eregi_replace('<lj-cut', '<cut', $t);
+	$t = @eregi_replace('<cut', '<cut', $t);
+	$t = @eregi_replace('<lj-cut', '<cut', $t);
 	return $t;
 }
 
