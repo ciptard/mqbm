@@ -116,7 +116,7 @@ function tag_cloud($s) {
 	$e=explode(':',buffer('Tags','sett'));
 	if(@trim($e[0])) $_s['tag_tag_translit']=1;
 	else $_s['tag_tag_translit']=0;
-	if(isset($tags)) foreach($tags as $tag => $size) e(" <a href='".$_s['base_url']."/tag/".$tag."' title='".$size."' style='font-size:".(($size*$s)+13)."px'>".tag_translit($tag,1)."</a> ");
+	if(isset($tags)) foreach($tags as $tag => $size) e(" <a href='".tags_link($tag)."' title='".$size."' style='font-size:".(($size*$s)+13)."px'>".tag_translit($tag,1)."</a> ");
 }
 
 function tag_list($tpl) {
@@ -133,10 +133,8 @@ function tag_list($tpl) {
 	foreach($entries as $tag) {
 	ct($tag);
 	$altgs='';
-	if($_s['config_chpu'] == "1") $tchpu=$_s['base_url'].'/tag/';
-        else $tchpu=$_s['base_url'].'/?t=';
 	$altgs=str_replace('%tag%',tag_translit($tag,1),$tpl);
-	$altgs=str_replace('%link%',$tchpu.$tag,$altgs);
+	$altgs=str_replace('%link%',tags_link($tag),$altgs);
 	$altgs=str_replace('%num%',sizeof(explode(',',file_get_contents($_s['tags_dir'].'/cache/'.$tag))),$altgs);
 	$alltags .= $altgs;
 	}

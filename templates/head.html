@@ -33,7 +33,7 @@ e($_s['moremeta']);
 			</div>
 
 			<div style="text-align:right;padding-top:20px;padding-right:20px;">
-				<form method="post" action="index.php" id="search">
+				<form method="post" action="<?php e($_s['base_url']);?>/index.php" id="search">
 					<input type="text" name="scword" size="25" value="поиск по записям" onfocus="if(this.value=='поиск по записям')this.value=''" onblur="if(this.value=='')this.value='поиск по записям'" class="input" />
 					<input type="image" src="<?php e($_s['base_url']); ?>/templates/search.png" name="" value="" />
 				</form>
