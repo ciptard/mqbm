@@ -1,4 +1,5 @@
 <? error_reporting(E_ALL & !~E_NOTICE);
+header('Content-Type: text/html; charset=utf-8');
 if (isset($_POST['lang'])) {
 	include_once 'lang/'.$_POST['lang'].'.inc';
 } else {

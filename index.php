@@ -3,9 +3,6 @@
 // © Zorg <ekumena@gmail.com>, 2007-2008
 // © muhas <muhas@muhas.ru>, 2009-2010
 // лицензия GNU GPL (http://www.gnu.org/licenses/gpl.html)
-#ini_set(’zlib.output_compression’, ‘On’);
-#ini_set(’zlib.output_compression_level’, ‘1′);
-date_default_timezone_set('Europe/Moscow') ;
 error_reporting(E_ALL & !~E_NOTICE);
 header('Content-Type: text/html; charset=utf-8');
 define('INCLUDED', TRUE);
