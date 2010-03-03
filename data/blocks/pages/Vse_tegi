@@ -3,7 +3,7 @@
 <div class="entry" style="text-align:center;"> 
 <?
 
-tag_cloud(0.4);
+tag_cloud();
 
 ?>
 </div>
