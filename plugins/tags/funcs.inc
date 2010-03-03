@@ -116,7 +116,7 @@ function tag_cloud($s) {
 	$e=explode(':',buffer('Tags','sett'));
 	if(@trim($e[0])) $_s['tag_tag_translit']=1;
 	else $_s['tag_tag_translit']=0;
-	if(isset($tags)) foreach($tags as $tag => $size) e(" <a href='".tags_link($tag)."' title='".$size."' style='font-size:".(($size*$s)+13)."px'>".tag_translit($tag,1)."</a> ");
+	if(isset($tags)) foreach($tags as $tag => $size) e(" <a href='".tags_link($tag)."' title='".$size."' style='font-size:".(0.5 + $size * (4 - 0.5) / 10)."em'>".tag_translit($tag,1)."</a> ");
 }
 
 function tag_list($tpl) {
@@ -227,7 +227,7 @@ function top_tag_cloud($s, $top) {
 	$e=explode(':',buffer('Tags','sett'));
 	if(@trim($e[0])) $_s['tag_tag_translit']=1;
 	else $_s['tag_tag_translit']=0;
-	if(isset($tags)) foreach($tags as $tag => $size) e(" <a href='".tags_link($tag)."' title='".$size."' style='font-size:".(($size*$s)+13)."px'>".tag_translit($tag,1)."</a> ");
+	if(isset($tags)) foreach($tags as $tag => $size) e(" <a href='".tags_link($tag)."' title='".$size."' style='font-size:".(0.5 + $size * (4 - 0.5) / 10)."em'>".tag_translit($tag,1)."</a> ");
 }
 function show_near_post($number) {
 	global $_v, $_s;

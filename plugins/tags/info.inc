@@ -1,6 +1,6 @@
 <?php
 $plugin_name = 'Tags';
-$plugin_version = '0.6.3';
+$plugin_version = '0.6.4';
 $plugin_description = $_l['tag_desc'];
 $plugin_author = 'Bolzamo & Zorg & muhas';
 
